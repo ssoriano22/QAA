@@ -1,0 +1,12 @@
+PASS	Basic Statistics	11_2H_both_S9_L008_R2_001.fastq.gz
+PASS	Per base sequence quality	11_2H_both_S9_L008_R2_001.fastq.gz
+FAIL	Per tile sequence quality	11_2H_both_S9_L008_R2_001.fastq.gz
+PASS	Per sequence quality scores	11_2H_both_S9_L008_R2_001.fastq.gz
+WARN	Per base sequence content	11_2H_both_S9_L008_R2_001.fastq.gz
+PASS	Per sequence GC content	11_2H_both_S9_L008_R2_001.fastq.gz
+PASS	Per base N content	11_2H_both_S9_L008_R2_001.fastq.gz
+PASS	Sequence Length Distribution	11_2H_both_S9_L008_R2_001.fastq.gz
+WARN	Sequence Duplication Levels	11_2H_both_S9_L008_R2_001.fastq.gz
+PASS	Overrepresented sequences	11_2H_both_S9_L008_R2_001.fastq.gz
+PASS	Adapter Content	11_2H_both_S9_L008_R2_001.fastq.gz
+FAIL	Kmer Content	11_2H_both_S9_L008_R2_001.fastq.gz

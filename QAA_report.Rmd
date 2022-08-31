@@ -1,0 +1,88 @@
+---
+title: "QAA_report"
+author: "Sophia Soriano"
+date: "2022-08-08"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r cars}
+summary(cars)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+## Part 1 - Read Quality Score Distributions
+
+1. Library 1: 11_2H_both_S9_L008 QScore
+
+    Read 1 QScore: 
+    
+    ![Library 1 Read 1 FastQC QScore Dist](/Users/ssoriano/bioinfo/Bi622/QAA/QAA_Part1/11_2H_both_S9_L008_R1_001_fastqc/Images/per_base_quality.png)
+    
+    Read 2 QScore: 
+    
+    ![Library 1 Read 2 FastQC QScore Dist](/Users/ssoriano/bioinfo/Bi622/QAA/QAA_Part1/11_2H_both_S9_L008_R2_001_fastqc/Images/per_base_quality.png)
+  
+
+    Read 1 N-Content:
+    
+    ![Library 1 Read 1 FastQC N-Content Dist](/Users/ssoriano/bioinfo/Bi622/QAA/QAA_Part1/11_2H_both_S9_L008_R1_001_fastqc/Images/per_base_n_content.png)
+    
+    Read 2 N-Content:
+    
+    ![Library 1 Read 2 FastQC N-Content Dist](/Users/ssoriano/bioinfo/Bi622/QAA/QAA_Part1/11_2H_both_S9_L008_R2_001_fastqc/Images/per_base_n_content.png)
+
+   Library 2: 14_3B_control_S10_L008 QScore
+   
+    Read 1 QScore: 
+    
+    ![Library 2 Read 1 FastQC QScore Dist](/Users/ssoriano/bioinfo/Bi622/QAA/QAA_Part1/14_3B_control_S10_L008_R1_001_fastqc/Images/per_base_quality.png)
+    
+    
+    Read 2 QScore: 
+    
+    ![Library 2 Read 2 FastQC QScore Dist](/Users/ssoriano/bioinfo/Bi622/QAA/QAA_Part1/14_3B_control_S10_L008_R2_001_fastqc/Images/per_base_quality.png)
+
+    Read 1 N-Content:
+    
+    ![Library 1 Read 1 FastQC N-Content Dist](/Users/ssoriano/bioinfo/Bi622/QAA/QAA_Part1/14_3B_control_S10_L008_R1_001_fastqc/Images/per_base_n_content.png)
+    
+    Read 2 N-Content:
+    
+    ![Library 1 Read 2 FastQC N-Content Dist](/Users/ssoriano/bioinfo/Bi622/QAA/QAA_Part1/14_3B_control_S10_L008_R2_001_fastqc/Images/per_base_n_content.png)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

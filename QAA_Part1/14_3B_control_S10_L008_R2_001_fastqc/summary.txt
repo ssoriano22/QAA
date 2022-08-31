@@ -1,0 +1,12 @@
+PASS	Basic Statistics	14_3B_control_S10_L008_R2_001.fastq.gz
+PASS	Per base sequence quality	14_3B_control_S10_L008_R2_001.fastq.gz
+WARN	Per tile sequence quality	14_3B_control_S10_L008_R2_001.fastq.gz
+PASS	Per sequence quality scores	14_3B_control_S10_L008_R2_001.fastq.gz
+FAIL	Per base sequence content	14_3B_control_S10_L008_R2_001.fastq.gz
+PASS	Per sequence GC content	14_3B_control_S10_L008_R2_001.fastq.gz
+PASS	Per base N content	14_3B_control_S10_L008_R2_001.fastq.gz
+PASS	Sequence Length Distribution	14_3B_control_S10_L008_R2_001.fastq.gz
+PASS	Sequence Duplication Levels	14_3B_control_S10_L008_R2_001.fastq.gz
+PASS	Overrepresented sequences	14_3B_control_S10_L008_R2_001.fastq.gz
+PASS	Adapter Content	14_3B_control_S10_L008_R2_001.fastq.gz
+FAIL	Kmer Content	14_3B_control_S10_L008_R2_001.fastq.gz
