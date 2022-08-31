@@ -1,0 +1,141 @@
+Mean calc base number: 0
+Mean calc base number: 1
+Mean calc base number: 2
+Mean calc base number: 3
+Mean calc base number: 4
+Mean calc base number: 5
+Mean calc base number: 6
+Mean calc base number: 7
+Mean calc base number: 8
+Mean calc base number: 9
+Mean calc base number: 10
+Mean calc base number: 11
+Mean calc base number: 12
+Mean calc base number: 13
+Mean calc base number: 14
+Mean calc base number: 15
+Mean calc base number: 16
+Mean calc base number: 17
+Mean calc base number: 18
+Mean calc base number: 19
+Mean calc base number: 20
+Mean calc base number: 21
+Mean calc base number: 22
+Mean calc base number: 23
+Mean calc base number: 24
+Mean calc base number: 25
+Mean calc base number: 26
+Mean calc base number: 27
+Mean calc base number: 28
+Mean calc base number: 29
+Mean calc base number: 30
+Mean calc base number: 31
+Mean calc base number: 32
+Mean calc base number: 33
+Mean calc base number: 34
+Mean calc base number: 35
+Mean calc base number: 36
+Mean calc base number: 37
+Mean calc base number: 38
+Mean calc base number: 39
+Mean calc base number: 40
+Mean calc base number: 41
+Mean calc base number: 42
+Mean calc base number: 43
+Mean calc base number: 44
+Mean calc base number: 45
+Mean calc base number: 46
+Mean calc base number: 47
+Mean calc base number: 48
+Mean calc base number: 49
+Mean calc base number: 50
+Mean calc base number: 51
+Mean calc base number: 52
+Mean calc base number: 53
+Mean calc base number: 54
+Mean calc base number: 55
+Mean calc base number: 56
+Mean calc base number: 57
+Mean calc base number: 58
+Mean calc base number: 59
+Mean calc base number: 60
+Mean calc base number: 61
+Mean calc base number: 62
+Mean calc base number: 63
+Mean calc base number: 64
+Mean calc base number: 65
+Mean calc base number: 66
+Mean calc base number: 67
+Mean calc base number: 68
+Mean calc base number: 69
+Mean calc base number: 70
+Mean calc base number: 71
+Mean calc base number: 72
+Mean calc base number: 73
+Mean calc base number: 74
+Mean calc base number: 75
+Mean calc base number: 76
+Mean calc base number: 77
+Mean calc base number: 78
+Mean calc base number: 79
+Mean calc base number: 80
+Mean calc base number: 81
+Mean calc base number: 82
+Mean calc base number: 83
+Mean calc base number: 84
+Mean calc base number: 85
+Mean calc base number: 86
+Mean calc base number: 87
+Mean calc base number: 88
+Mean calc base number: 89
+Mean calc base number: 90
+Mean calc base number: 91
+Mean calc base number: 92
+Mean calc base number: 93
+Mean calc base number: 94
+Mean calc base number: 95
+Mean calc base number: 96
+Mean calc base number: 97
+Mean calc base number: 98
+Mean calc base number: 99
+Mean calc base number: 100
+[29.54438924 30.91357785 32.98169795 34.5145607  35.25285618 37.66245982
+ 38.04035332 38.39758732 38.69003742 38.53031454 38.7062151  38.66760915
+ 38.4189551  38.62675835 38.37917403 38.09711741 38.32867405 38.51285296
+ 38.25500532 38.41606503 38.24743164 38.22158722 38.49226372 38.51575024
+ 38.51644229 38.46824617 38.45277542 38.52697856 38.4645904  38.4203811
+ 38.27478832 37.87114678 37.78420035 37.60716565 37.49933677 37.43724814
+ 37.41104046 37.43561449 37.42073468 37.89635725 38.13396224 38.2995808
+ 38.28598061 38.43288702 38.44386919 38.41615669 38.44809609 38.39910927
+ 38.38451096 38.34762964 38.41995907 38.44454414 38.44029585 38.23767661
+ 38.2697151  38.3487935  38.357284   38.2858126  38.25908447 38.19168931
+ 38.17500312 38.22388364 38.23483113 38.15635921 38.18941158 38.11784154
+ 38.18299388 38.08394218 38.03424055 38.08965836 38.08694868 38.02267622
+ 37.96632854 37.97132361 37.96503383 37.85413922 36.93187292 37.33014442
+ 37.75353134 37.83914117 37.96555811 37.97168664 37.99916471 37.90965702
+ 37.82345174 37.82432599 37.76131401 37.77941653 37.75296788 37.68643052
+ 37.64722778 37.56389411 37.53410971 37.50263964 37.31588662 37.33841218
+ 37.34298476 37.27271822 37.02432473 37.1072161  35.13379311]
+	Command being timed: "./QScore_Dist.py -f /projects/bgmp/shared/2017_sequencing/demultiplexed/14_3B_control_S10_L008_R2_001.fastq.gz -l 101 -o QScore_L2_R2.png"
+	User time (seconds): 218.47
+	System time (seconds): 0.19
+	Percent of CPU this job got: 99%
+	Elapsed (wall clock) time (h:mm:ss or m:ss): 3:38.74
+	Average shared text size (kbytes): 0
+	Average unshared data size (kbytes): 0
+	Average stack size (kbytes): 0
+	Average total size (kbytes): 0
+	Maximum resident set size (kbytes): 69172
+	Average resident set size (kbytes): 0
+	Major (requiring I/O) page faults: 0
+	Minor (reclaiming a frame) page faults: 28640
+	Voluntary context switches: 858
+	Involuntary context switches: 80
+	Swaps: 0
+	File system inputs: 0
+	File system outputs: 0
+	Socket messages sent: 0
+	Socket messages received: 0
+	Signals delivered: 0
+	Page size (bytes): 4096
+	Exit status: 0
