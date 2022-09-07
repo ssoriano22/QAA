@@ -85,8 +85,8 @@ Fig. 7: Read length distributions for Read 1 and Read 2 files for each library (
 Using the python script from PS8, in an updated version named "QAA.py," mapped/unmapped counts were tallied providing results in Table 1. 
 
 ```{r warning=FALSE, echo=FALSE}
-L1_MC_df = read.csv(file="/Users/ssoriano/bioinfo/Bi622/QAA/QAA_Part3/11_2H_both_S9_L008_mappedcount.txt",header=FALSE,sep = ":")
-L2_MC_df = read.csv(file="/Users/ssoriano/bioinfo/Bi622/QAA/QAA_Part3/14_3B_control_S10_L008_mappedcount.txt",header=FALSE,sep = ":")
+L1_MC_df = read.csv(file="/Users/ssoriano/bioinfo/Bi622/QAA/QAA_Part3/Mapped_count_QAAcode/11_2H_both_S9_L008_mappedcount.txt",header=FALSE,sep = ":")
+L2_MC_df = read.csv(file="/Users/ssoriano/bioinfo/Bi622/QAA/QAA_Part3/Mapped_count_QAAcode/14_3B_control_S10_L008_mappedcount.txt",header=FALSE,sep = ":")
 L_MC_df = merge(L1_MC_df,L2_MC_df,"V1")
 colnames(L_MC_df) = c("Count Category","11_2H_both_S9_L008","14_3B_control_S10_L008")
 L_MC_df = L_MC_df %>% arrange(`11_2H_both_S9_L008`)
