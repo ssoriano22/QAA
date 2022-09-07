@@ -1,0 +1,3 @@
+Mapped Count: 16084601
+Unmapped Count: 1381012
+Total Read Count: 17465613
