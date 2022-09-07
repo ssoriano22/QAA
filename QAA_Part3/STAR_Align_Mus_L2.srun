@@ -1,0 +1,21 @@
+#!/bin/bash
+
+#SBATCH --account=bgmp          ### SLURM account which will be charged for the job
+#SBATCH --partition=bgmp          ### partition to run things
+#SBATCH --job-name=STAR_A_MM_L2      ### Job Name
+#SBATCH --nodes=1               ### Node count required for the job
+#SBATCH --cpus-per-task=8       ### Number of cpus (cores) per task
+#SBATCH --mail-user=ssoriano@uoregon.edu #Send email when done
+#SBATCH --mail-type=END
+
+#Slurm script -^
+
+/usr/bin/time -v STAR --runThreadN 8 --runMode alignReads \
+    --outFilterMultimapNmax 3 \
+    --outSAMunmapped Within KeepPairs \
+    --alignIntronMax 1000000 --alignMatesGapMax 1000000 \
+    --readFilesCommand zcat \
+    --readFilesIn /projects/bgmp/ssoriano/bioinfo/Bi622/QAA/QAA_Part2/14_3B_control_S10_L008_trim_1P.fastq.gz \
+            /projects/bgmp/ssoriano/bioinfo/Bi622/QAA/QAA_Part2/14_3B_control_S10_L008_trim_2P.fastq.gz \
+    --genomeDir Mus_musculus.GRCm39.dna.ens107.STAR.2.7.10a/ \
+    --outFileNamePrefix STAR_align_mm_14_3B_control_S10_L008

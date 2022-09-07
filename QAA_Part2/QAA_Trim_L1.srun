@@ -1,0 +1,17 @@
+#!/bin/bash
+
+#SBATCH --account=bgmp          ### SLURM account which will be charged for the job
+#SBATCH --partition=bgmp          ### partition to run things
+#SBATCH --job-name=Trimm_L1      ### Job Name
+#SBATCH --nodes=1               ### Node count required for the job
+#SBATCH --cpus-per-task=1       ### Number of cpus (cores) per task
+
+#Slurm script -^
+
+trimmomatic PE Intermediate_CutAdapt_Files/11_2H_both_S9_L008_R1_001_cut.fastq \
+    Intermediate_CutAdapt_Files/11_2H_both_S9_L008_R2_001_cut.fastq \
+    -baseout 11_2H_both_S9_L008_trim.fastq.gz \
+    LEADING:3 \
+    TRAILING:3 \
+    SLIDINGWINDOW:5:15 \
+    MINLEN:35

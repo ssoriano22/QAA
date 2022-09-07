@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#SBATCH --account=bgmp          ### SLURM account which will be charged for the job
+#SBATCH --partition=bgmp          ### partition to run things
+#SBATCH --job-name=STARDBMM      ### Job Name
+#SBATCH --nodes=1               ### Node count required for the job
+#SBATCH --cpus-per-task=8       ### Number of cpus (cores) per task
+
+#Slurm script -^
+
+/usr/bin/time -v STAR \
+--runThreadN 8 \
+--runMode genomeGenerate \
+--genomeDir /projects/bgmp/ssoriano/bioinfo/Bi622/QAA/QAA_Part3/Mus_musculus.GRCm39.dna.ens107.STAR.2.7.10a/ \
+--genomeFastaFiles Mouse_DNA/Mus_musculus.GRCm39.dna.primary_assembly.fa \
+--sjdbGTFfile Mus_musculus.GRCm39.107.gtf
