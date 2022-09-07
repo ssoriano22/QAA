@@ -1,0 +1,161 @@
+----------------------------------
+LAB NOTEBOOK - QAA/FASTQC
+Author: Sophia Soriano
+----------------------------------
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Part 1: Started 31AUG2022
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Created QAA_report.Rmd file
+* Ran FASTQC v0.11.9 on read 1 (R1) and read 2 (R2) files for both assigned libraries (11_2H_both_S9_L008_R1_001.fastq.gz,11_2H_both_S9_L008_R2_001.fastq.gz,14_3B_control_S10_L008_R1_001.fastq.gz,14_3B_control_S10_L008_R2_001.fastq.gz)
+  ** Data files located in "/projects/bgmp/shared/2017_sequencing/demultiplexed/"
+  ** Command used for set of files (different output names used for each library): fastqc -o QAA_Part1 /projects/bgmp/shared/2017_sequencing/demultiplexed/14_3B_control_S10_L008_R1_001.fastq.gz /projects/bgmp/shared/2017_sequencing/demultiplexed/14_3B_control_S10_L008_R2_001.fastq.gz
+  ** All exit status = 0, library 1 (11_2H_both_S9_L008) ran for roughly 2hrs 30min, library 2 (14_3B_control_S10_L008) ran for roughyl 40min
+* Ran QScore_Dist.py from Demux assignment with each of the four files to generate QScore plots for comparison:
+  ** Both exit status: 0
+  ** Library 1 run time per file = 14min, library 2 run time per file = 3.5min
+* Added FASTQC QScore and N-content graphs to QAA_report.Rmd
+  ** Apparently keeping the image references in the same line with "{width=50%}" will allow two images per line
+  ** Added "\newline" to the end of image pairs and caption lines to keep image/text order when knitted
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Part 2: Started 03SEP2022
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Created new conda environment "QAA" and installed cutadapt v4.1 and trimmomatic v0.39 using module spider and conda install
+* Started interactive session: $ srun --account=bgmp --partition=bgmp --nodes=1 --ntasks-per-node=1 --time=8:00:00 --cpus-per-task=1 --pty bash
+* Tried grep-ing for R1 adapter in L1 R1 file - no results
+  ** $ zcat /projects/bgmp/shared/2017_sequencing/demultiplexed/11_2H_both_S9_L008_R1_001.fastq.gz | head -300 | tail -200 | grep "^AGATCGGAAGAGCACACGTCTGAACTCCAGTCA"
+  ** $ zcat /projects/bgmp/shared/2017_sequencing/demultiplexed/11_2H_both_S9_L008_R1_001.fastq.gz | head -300 | tail -200 | grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCA"
+* Tried grep-ing for rev comp of R1 adapter in L1 R1 file (same as above commands with R1 adapter rev comp) - no results
+  ** Rev comp R1 adapter = TGACTGGAGTTCAGACGTGTGCTCTTCCGATCT (used bioinfo.py v0.4 revcomp())
+* Tried grep-ing for forward and rev comp of R2 adapter in L1 R1 file (same as above commands with R2 adapter and its rev comp) - no results
+  ** Rev comp R2 adapter = ACACTCTTTCCCTACACGACGCTCTTCCGATCT (used bioinfo.py v0.4 revcomp())
+  ** Maybe "N" are interfering? Used head -300 tail -200 to look at some sequence lines...rarely if any "N" at end of each sequence line
+  ** Would have expected R2 adapter rev comp to be at the end of R1 sequences...
+
+04SEP2022
+
+* Searching R1 file (11_2H_both_S9_L008_R1_001.fastq.gz) with R1 adapter returned results
+  ** $ zcat /projects/bgmp/shared/2017_sequencing/demultiplexed/11_2H_both_S9_L008_R1_001.fastq.gz | grep "AGATCGGAAGAGCACACGTCTGAACTCCAGTCA"
+  ** R1 adapter sequence found at end of R1 reads when whole file was used
+  ** Confirmed with other files/reads and Illumina website - see Rmd for reasoning and link.
+* Ran cutadapt using commands in QAA_CutAdapt_L1.srun and QAA_CutAdapt_L2.srun
+  ** Both completed exit status: 0, L1 run time = 3:03.42 m:s, L2 run time = 0:46.00 m:s
+  ** L1 output: slurm-22193650.out, L2 output: slurm-22193655.out
+* Ran trimmomatic using commands in QAA_Trim_L1.srun and QAA_Trim_L2.srun - both successful according to trimmomatic
+  ** L1 output: slurm-22193675, L2 output: slurm-22193676
+  ** Trimmomatic references (because -help documentation is unfortunately vague):
+    *** http://www.usadellab.org/cms/uploads/supplementary/Trimmomatic/TrimmomaticManual_V0.32.pdf
+    *** https://datacarpentry.org/wrangling-genomics/03-trimming/index.html
+* Created tsv files of read length distributions for both libraries (two plots, R1 and R2 graphed on the same plot per library)
+  ** $ zcat 11_2H_both_S9_L008_R1_trim.fastq.gz | grep -A1 "^@" | grep -v "^@" | grep -v "^--" | awk '{print length($0)}' |
+sort -n | uniq -c | sort -n > 11_2H_both_S9_L008_R1_trim.tsv
+  ** $ zcat 11_2H_both_S9_L008_R2_trim.fastq.gz | grep -A1 "^@" | grep -v "^@" | grep -v "^--" | awk '{print length($0)}' |
+sort -n | uniq -c | sort -n > 11_2H_both_S9_L008_R2_trim.tsv
+  ** $ zcat 14_3B_control_S10_L008_R1_trim.fastq.gz | grep -A1 "^@" | grep -v "^@" | grep -v "^--" | awk '{print length($0)}' |
+sort -n | uniq -c | sort -n > 14_3B_control_S10_L008_R1_trim.tsv
+  ** $ zcat 14_3B_control_S10_L008_R2_trim.fastq.gz | grep -A1 "^@" | grep -v "^@" | grep -v "^--" | awk '{print length($0)}' |
+sort -n | uniq -c | sort -n > 14_3B_control_S10_L008_R2_trim.tsv
+* Uploaded to github so that tsv files are availble locally
+* Plotted R1 and R2 tsv files in one graph for each library using ggplot in Rmd
+  ** Used gridExtra package grid.arrange() to plot graphs side by side. Couldn't manage to remove a lengend and maintain the same colors...it'll be fine
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+Part 3: Started 04SEP2022
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Installed the following in QAA environment on talapas: STAR v2.7.10a, numpy v1.13.1, pysam v0.19.1, matplotlib v2.0.1, htseq v2.0.2
+* Created new folder for mouse genome files (primary assembly and gtf files) - "Mouse_DNA"
+  ** Downloaded Ensembl 107 files - "Mus_musculus.GRCm39.107.gtf" and "Mus_musculus.GRCm39.dna.primary_assembly.fa"
+  ** http://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/
+  ** http://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz
+* Created new folder to hold STAR database - "Mus_musculus.GRCm39.dna.ens107.STAR.2.7.10a"
+
+05SEP2022
+
+* Modeling STAR run after the one performed in PS8 - see labbook_PS8.txt in Bi621
+  ** Created STAR_db.srun to generate STAR mouse database in specific folder created above
+    *** Exit Status: 0, run time = 1:26.62 m:s
+  ** Created STAR_Align_Mus_L1.srun and STAR_Align_Mus_L2.srun to perform STAR alignment bash commands
+    *** Ran both at the same time, both Exit Status: 104 -
+      **** "EXITING because of FATAL ERROR in reads input: quality string length is not equal to sequence length
+          @K00337:83:HJKJNBBXX:8:1105:28199:42091
+          +
+
+          SOLUTION: fix your fastq file"
+    *** This thread recommends running 1 at a time, and clearing any old STAR files out (https://github.com/alexdobin/STAR/issues/1055), will try that and rerun
+    *** Same error occurs - will ask Leslie
+
+06SEP2022
+
+    *** Discovered error in trimmomatic run - file names mixed up in command. Corrected commands and used -baseout for naming output files
+* Re-ran trimmomatic on libraries 1 and 2
+  ** Lib1 output: slurm-22205886.out, Lib2 output: slurm-22205890.out
+  ** Percentages for both surviving in both libraries still >95%
+* Remade tsv files of read length distributions as described in Part 2 earlier
+* Corrected Rmd file to use new trimmed files for graphing - Read 2 is still more trimmed, but not as destroyed as the last version
+* Re-ran STAR with L1 - slurm-22205963
+  ** Exit Status: 0, run time = 2:49:50 h:m:s
+* Re-ran STAR with L2 - slurm-22207322
+  ** Exit Status: 0, run time = 43:40.52 m:s
+* Ran corrected PS8.py code (now called QAA.py, includes argparse for file names and evaluation of 256 bitwise flag) on sam files output by both STAR runs (one for each library)
+* Ran htseq-count on firstlibrary sam file:
+  ** $ htseq-count --format sam --stranded=yes STAR_align_mm_11_2H_both_S9_L008Aligned.out.sam Mus_musculus.GRCm39.107.gtf > 11_2H_both_S9_L008_htseq.txt
+* Looked up how to make table in Rmd - kable() method
+* First htseq-count didn't seem to work - almost all 0s
+* Ran stranded=reverse version on same file
+  ** $ htseq-count --format sam --stranded=reverse  STAR_align_mm_11_2H_both_S9_L008Aligned.out.sam Mus_musculus.GRCm39.107.gtf > 11_2H_both_S9_L008_htseq_strandedR.txt
+
+07SEP2022
+
+* Somehow only got chr 1 fasta file...that's why ht seq isn't working
+* Redownloaded fasta file w/ wget
+  ** $ wget http://ftp.ensembl.org/pub/release-107/fasta/mus_musculus/dna/Mus_musculus.GRCm39.dna.primary_assembly.fa.gz
+* Moved all old STAR files and subsequent results files to old_STAR_alignment_v3 folder and re-ran STAR as described earlier
+  ** Unzipped ensemble mouse fasta file
+  ** Ran STAR_db.srun again - slurm-22208396
+    *** Exit Status: 0, run time = 15:29.20 m:s
+  ** Ran STAR_Align_Mus_L1.srun (slurm-22208706) and STAR_Align_Mus_L2.srun (slurm-22208716) again
+    *** L1: Exit Status: 0, run time = 2:21.46 m:s
+    *** L2: Exit Status: 0, run time = 0:40.85 m:s
+* Ran QAA.py script again for each library sam file
+  ** ./QAA.py -f STAR_align_mm_11_2H_both_S9_L008Aligned.out.sam -o 11_2H_both_S9_L008_mappedcount.txt
+  ** ./QAA.py -f STAR_align_mm_14_3B_control_S10_L008Aligned.out.sam -o 14_3B_control_S10_L008_mappedcount.txt
+* Ran htseq-count again for stranded=yes and stranded=reverse for both libraries
+  ** $ htseq-count --format sam --stranded=yes  STAR_align_mm_11_2H_both_S9_L008Aligned.out.sam Mus_musculus.GRCm39.107.gtf > 11_2H_both_S9_L008_htseq_strandedY.txt
+  ** Successful, seems to be not as many 0 counts
+* Ran other commands in srun files
+  ** Htseq_11_sR.srun - slurm-22209784
+  ** Htseq_14_sY.srun - slurm-22209786
+  ** Htseq_14_sR.srun - slurm-22209787
+* See ICA4 for help answering final question
+  ** And this: https://htseq.readthedocs.io/en/release_0.11.1/count.html
+  ** Number of reads mapped to feature in each fw/rv file:
+    *** Command:$ cat 11_2H_both_S9_L008_htseq_strandedY.txt | grep -v "^__" |  awk '{sum+=$2} END {print sum}'
+      **** Number of reads mapped, fw: 602072
+    *** Command:$ cat 11_2H_both_S9_L008_htseq_strandedR.txt | grep -v "^__" |  awk '{sum+=$2} END {print sum}'
+      **** Number of reads mapped, rv: 13819257
+    *** Command:$ cat 14_3B_control_S10_L008_htseq_strandedY.txt | grep -v "^__" |  awk '{sum+=$2} END {print sum}'
+      **** Number of reads mapped, fw: 167859
+    *** Command:$ cat 14_3B_control_S10_L008_htseq_strandedR.txt | grep -v "^__" |  awk '{sum+=$2} END {print sum}'
+      **** Number of reads mapped, rv: 3667140
+  ** Total number of reads in each fw/rv file:
+    *** Command: $ cat 11_2H_both_S9_L008_htseq_strandedY.txt | awk '{sum+=$2} END {print sum}'
+      **** Total reads, fw: 17465613
+    *** Command: $ cat 11_2H_both_S9_L008_htseq_strandedR.txt | awk '{sum+=$2} END {print sum}'
+      **** Total reads, rv: 17465613
+    *** Command: $ cat 14_3B_control_S10_L008_htseq_strandedY.txt | awk '{sum+=$2} END {print sum}'
+      **** Total reads, fw: 4246652
+    *** Command: $ cat 14_3B_control_S10_L008_htseq_strandedR.txt | awk '{sum+=$2} END {print sum}'
+      **** Total reads, rv: 4246652
+  ** Calculate percentage of reads mapped by dividing num reads mapped by total reads for each file
+    *** Percent of reads mapped, fw: 3.45%
+    *** Percent of reads mapped, rv: 79.12%
+    *** Percent of reads mapped, fw: 3.95%
+    *** Percent of reads mapped, rv: 86.35%
+* Will upload to github
+    
+  
+
